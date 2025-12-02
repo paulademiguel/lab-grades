@@ -332,6 +332,7 @@ grades_wide |>
 The table below shows an extract of the average grades per student and per course.
 
 ### Question 20
+
 ```{r}
 grades_wide |>
   ggplot(aes(
@@ -347,4 +348,30 @@ grades_wide |>
   )
 ```
 The scatter plot below displays the relationship between the average grades in `Dragon Lore and Taming` and `Celestial Navigation and Astronomy`.  
+
+### Question 21
+
+```{r}
+correlations <- grades_wide |>
+  summarise(
+    correlation = cor(
+      `History of the Arcane`,
+      `Celestial Navigation and Astronomy`,
+      use = "complete.obs"
+    ),
+    .by = group
+  )
+
+correlations |>
+  knitr::kable()
+```
+
+The table below reports the correlation between the average grades in `History of the Arcane` and `Celestial Navigation and Astronomy` for each group.
+
+Question 22
+```{r}
+
+```
+
+
 

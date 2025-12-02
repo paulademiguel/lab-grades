@@ -247,7 +247,7 @@ elem_counts <- elem_grades |>
 
 elem_counts <- elem_counts |>
   inner_join(students, by = "id") |>
-  select(id, group, n_elem)
+  select(id, group, sex, n_elem)
 
 elem_counts |>
   slice_head(n = 10) |>
@@ -290,4 +290,18 @@ elem_counts |>
 ```
 The graphic below compares the number of grades obtained in Elemental Mastery and Control across groups.
 This visualisation can be used to assess whether the number of grades depends on the group.
+
+### Question 18
+```{r}
+elem_summary <- elem_counts |>
+  summarise(
+    avg_elem = mean(n_elem),
+    .by = c(group, sex)
+  )
+elem_summary |>
+  ggplot(aes(x = group, y = avg_elem)) +
+  geom_col(fill = "steelblue") +
+  facet_wrap(~ sex) +
+  theme_minimal()
+```
 

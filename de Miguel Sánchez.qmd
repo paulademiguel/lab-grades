@@ -129,3 +129,11 @@ students |>
   
 ```
 
+### Question 10
+```{r}
+n_grades <-grades |>
+  filter(!is.na(grade))|>
+  nrow()
+n_grades
+```
+The data set contains 43882 grades

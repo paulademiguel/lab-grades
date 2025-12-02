@@ -52,3 +52,13 @@ class(students$id)
 The `birth_date` column of the `students`data frame is of class Date
 
 The `sex`column is correctly identified as a factor
+
+### Question 4
+```{r}
+grades <- read_delim(
+  here("grades.csv"),
+  delim = "|",
+  na = "unknown"
+)
+```
+

@@ -332,3 +332,19 @@ grades_wide |>
 The table below shows an extract of the average grades per student and per course.
 
 ### Question 20
+```{r}
+grades_wide |>
+  ggplot(aes(
+    x = `Celestial Navigation and Astronomy`,
+    y = `Dragon Lore and Taming`
+  )) +
+  geom_point(alpha = 0.7, color = "cyan4") +
+  theme_minimal() +
+  labs(
+    title = "Dragon Lore and Taming vs Celestial Navigation and Astronomy",
+    x = "Average grade in Celestial Navigation and Astronomy",
+    y = "Average grade in Dragon Lore and Taming"
+  )
+```
+The scatter plot below displays the relationship between the average grades in `Dragon Lore and Taming` and `Celestial Navigation and Astronomy`.  
+

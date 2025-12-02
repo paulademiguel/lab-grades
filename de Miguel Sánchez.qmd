@@ -228,4 +228,29 @@ grades_per_student |>
 ```
 The histogram below compares the distribution of the number of grades for female and male students.
 
+### Question 15
+```{r}
+elem_id <- courses |>
+  filter(course == "Elemental Mastery and Control") |>
+  pull(course_id)
+
+elem_id
+
+elem_grades <- grades |>
+  filter(course_id == elem_id)
+
+elem_counts <- elem_grades |>
+  summarise(
+    n_elem = n(),
+    .by = id
+  )
+
+elem_counts <- elem_counts |>
+  inner_join(students, by = "id") |>
+  select(id, group, n_elem)
+
+elem_counts |>
+  slice_head(n = 10) |>
+  knitr::kable()
+```
 

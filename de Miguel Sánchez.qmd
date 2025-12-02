@@ -304,4 +304,31 @@ elem_summary |>
   facet_wrap(~ sex) +
   theme_minimal()
 ```
+### Question 19
+```{r}
+grades_avg <- grades |>
+  inner_join(students, by = "id") |>
+  inner_join(courses, by = "course_id") |>
+  summarise(
+    avg_grade = mean(grade, na.rm = TRUE),
+    .by = c(id, group, course)
+  )
+grades_wide <- grades_avg |>
+  pivot_wider(
+    id_cols = c(id, group),
+    names_from = course,
+    values_from = avg_grade
+  )
+grades_wide |>
+  select(
+    id,
+    group,
+    `Ancient Magic and Mysticism`,
+    `Celestial Navigation and Astronomy`
+  ) |>
+  slice_head(n = 5) |>
+  knitr::kable()
+```
+The table below shows an extract of the average grades per student and per course.
 
+### Question 20

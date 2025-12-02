@@ -4,6 +4,8 @@ author: "Paula de Miguel Sánchez"
 format: html
 ---
 
+Link to my GitHub Repository: https://github.com/paulademiguel/lab-grades.git
+
 ```{r}
 here::i_am("lab-grades.Rproj")
 
@@ -137,3 +139,39 @@ n_grades <-grades |>
 n_grades
 ```
 The data set contains 43882 grades
+
+```{r}
+courses |>
+  arrange(course) |>
+  knitr::kable()
+```
+I just did this because the merge dataset (avg_by_group) I just created was empty and I didn't understant why until I realised that maybe I was not naming in the proper way the courses, so I did it to know the accurate names.
+
+### Question 11
+```{r}
+necromancy_id <- courses |>
+  filter(course == "Necromancy and Spirit Summoning") |>
+  pull(course_id)
+
+necromancy_id
+
+grades_necro <- grades |>
+  filter(course_id == necromancy_id) |>
+  inner_join(students, by = "id")
+
+avg_by_group <- grades_necro |>
+  summarise(
+    avg_grade = mean(grade, na.rm = TRUE),
+    .by = group
+  )
+avg_by_group |>
+  ggplot(aes(x = group, y = avg_grade)) +
+  geom_col(fill = "olivedrab") +
+  theme_minimal() +
+  labs(
+    title = "Average grade in Necromancy and  Spirit Summoning by group",
+   x = "Group",
+    y = "Average grade"
+  )
+```
+

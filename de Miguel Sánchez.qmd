@@ -212,3 +212,20 @@ summary_table <- grades_per_student |>
 summary_table
 ```
 
+The table below gives the minimum, maximum, average and median number of grades per student.
+
+###   Question 14
+```{r}
+grades_per_student |>
+  ggplot(aes(x = n_grades, fill = sex)) +
+  geom_histogram(position = "identity", alpha = 0.6, binwidth = 1) +
+  theme_minimal()
+ labs(
+    title = "Distribution of number of grades by sex",
+    x = "Sex",
+    y = "Number of grades"
+  )
+```
+The histogram below compares the distribution of the number of grades for female and male students.
+
+

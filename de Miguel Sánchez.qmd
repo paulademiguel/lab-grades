@@ -66,7 +66,7 @@ grades <- read_delim(
 students |>
   count(group) |>
   ggplot(aes(x=group, y = n)) +
-  geom_col(fill = "steelblue") +
+  geom_col(fill = "lavenderblush2") +
   theme_minimal() +
   labs(
     title = "Number of students per group", 
@@ -75,3 +75,17 @@ students |>
   )
 ```
 The bar plot shows the number of students that are in each group
+
+### Question 6
+```{r}
+students |>
+  ggplot(aes(x = group, fill = sex)) +
+  geom_bar(position = "fill") +
+  theme_minimal() +
+  labs(
+    title = "Gender balance by group",
+    x = "Group",
+    y = "Proportion"
+  )
+```
+

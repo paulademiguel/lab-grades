@@ -145,7 +145,7 @@ courses |>
   arrange(course) |>
   knitr::kable()
 ```
-I just did this because the merge dataset (avg_by_group) I just created was empty and I didn't understant why until I realised that maybe I was not naming in the proper way the courses, so I did it to know the accurate names.
+I just did this because the merge dataset (avg_by_group) I just created was empty and I didn't understand why until I realised that maybe I was not naming properly the courses, so I did it to know the accurate names.
 
 ### Question 11
 ```{r}
@@ -172,6 +172,20 @@ avg_by_group |>
     title = "Average grade in Necromancy and  Spirit Summoning by group",
    x = "Group",
     y = "Average grade"
+  )
+```
+### Question 12
+```{r}
+grades_mod <- grades |>
+  inner_join(courses, by = "course_id")
+grades_mod |>
+  ggplot(aes(x = factor(module), y = grade)) +
+  geom_boxplot(fill = "lightskyblue1") +
+  theme_minimal() +
+  labs(
+    title = "Distribution of grades by module",
+    x = "Module",
+    y = "Grade"
   )
 ```
 

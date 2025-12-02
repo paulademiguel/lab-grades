@@ -423,6 +423,23 @@ The final grade of a student is defined as the average of their average grades a
 
 The table below displays the top five students according to this metric.
 
+### Question 24
+```{r}
+final_grades_df |>
+  ggplot(aes(x = group, y = final_grade)) +
+  geom_boxplot(fill = "violetred") +
+  theme_minimal() +
+  labs(
+    title = "Differences in final grades between groups",
+    x = "Group",
+    y = "Final grade"
+  )
+```
 
+We use a  boxplot  to study the differences in final grades between groups.  
+
+This representation highlights potential variations in performance across groups.
+
+### Question 25
 
 

@@ -61,4 +61,17 @@ grades <- read_delim(
   na = "unknown"
 )
 ```
-
+### Question 5
+```{r}
+students |>
+  count(group) |>
+  ggplot(aes(x=group, y = n)) +
+  geom_col(fill = "steelblue") +
+  theme_minimal() +
+  labs(
+    title = "Number of students per group", 
+    x = "Group",
+    y = "Count"
+  )
+```
+The bar plot shows the number of students that are in each group

@@ -397,7 +397,7 @@ best_students |>
   )
 ```
 
-The plot below shows the relationship between the average grades in `History of the Arcane`and `Celestial Navigation and Astronomy` for the group where these grades are the most correlated.
+The plot for Group 11 (the group with the strongest correlation) shows a clear positive relationship: higher grades in `Celestial Navigation and Astronomy` are associated with higher grades in `History of the Arcane`, confirming the strong correlation computed previously.
 
 ### Question 23
 ```{r}
@@ -452,6 +452,49 @@ final_grades_df |>
     x = "Group",
     y = "Final grade"
   )
+```
+
+### Question 26
+```{r}
+course_modules <- courses |>
+  select(course, module)
+
+grades_long <- grades_wide2 |>
+  pivot_longer(
+    cols = -c(id, group, sex),
+    names_to = "course",
+    values_to = "avg_grade"
+  )
+
+grades_mod <- grades_long |>
+  inner_join(course_modules, by = "course")
+
+module_avgs <- grades_mod |>
+  summarise(
+    module_avg = mean(avg_grade, na.rm = TRUE),
+    .by = c(id, group, module)
+  )
+
+cond1 <- grades_wide2 |>
+  rowwise() |>
+  mutate(no_low_course = all(c_across(-c(id, group, sex)) >= 5)) |>
+  ungroup() |>
+  select(id, no_low_course)
+
+cond2 <- module_avgs |>
+  summarise(all_modules_ok = all(module_avg >= 10), .by = id)
+
+pass_df <- final_grades_df |>
+  inner_join(cond1, by = "id") |>
+  inner_join(cond2, by = "id") |>
+  mutate(
+    pass = no_low_course & all_modules_ok
+  ) |>
+  select(id, group, sex, final_grade, pass)
+
+pass_df |>
+  slice_head(n = 5) |>
+  knitr::kable()
 ```
 
 

@@ -88,4 +88,22 @@ students |>
     y = "Proportion"
   )
 ```
+### Question 7
+```{r}
+students <- students |>
+  mutate(
+    age = time_length(today() - birth_date, unit = "year") |> round() 
+    )
+students |>
+  ggplot(aes(x=age)) +
+  geom_histogram(binwidth=1, fill = "orchid4", color = "white") +
+  theme_minimal() +
+  labs(
+    title = "Distribution of students ages", 
+    x = "Age",
+    y= "Count"
+  )
+  
+```
 
+The histogram below displays the age distribution of the students

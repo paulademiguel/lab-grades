@@ -506,4 +506,37 @@ n_fail_highgrade <- pass_df |>
 n_fail_highgrade
 ```
 
+### Question 28
+```{r}
+pass_rate <- pass_df |>
+  summarise(
+    pass_rate = mean(pass),  
+    .by = group
+  )
+
+pass_rate |>
+  ggplot(aes(x = group, y = pass_rate)) +
+  geom_col(fill = "firebrick4") +
+  theme_minimal() +
+  labs(
+    title = "Pass rate per group",
+    x = "Group",
+    y = "Pass rate"
+  )
+
+course_failures <- grades_wide2 |>
+  pivot_longer(
+    cols = -c(id, group, sex),
+    names_to = "course",
+    values_to = "avg_grade"
+  ) |>
+  filter(avg_grade < 5) |>
+  summarise(n_fail = n(), .by = course)
+
+worst_course <- course_failures |>
+  slice_max(n_fail, n = 1)
+
+worst_course
+```
+
 

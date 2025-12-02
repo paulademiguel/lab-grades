@@ -497,4 +497,13 @@ pass_df |>
   knitr::kable()
 ```
 
+### Question 27
+```{r}
+n_fail_highgrade <- pass_df |>
+  filter(pass == FALSE, final_grade >= 10) |>
+  nrow()
+
+n_fail_highgrade
+```
+
 

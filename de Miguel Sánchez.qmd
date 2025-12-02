@@ -28,7 +28,7 @@ courses <- read_csv(here("courses.csv"))
 courses |>
   arrange(course) |>
   rename(
-    `course name`     = course,
+    `Course name`     = course,
     identifier        = course_id,
     `number of grades` = nb_grades
   ) |>
@@ -120,6 +120,12 @@ students |>
 
 ### Question 9
 ```{r}
-
+students |>
+  group_by(group) |>
+  slice_max(order_by = age, n= 1) |>
+  select(id, sex, age, group) |>
+  arrange(desc(age)) |>
+  knitr:: kable()
+  
 ```
 

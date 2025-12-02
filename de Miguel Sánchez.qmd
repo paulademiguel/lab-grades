@@ -523,7 +523,10 @@ pass_rate |>
     x = "Group",
     y = "Pass rate"
   )
+```
 
+### Question 29
+```{r}
 course_failures <- grades_wide2 |>
   pivot_longer(
     cols = -c(id, group, sex),
@@ -538,5 +541,25 @@ worst_course <- course_failures |>
 
 worst_course
 ```
+### Question 30
+```{r}
+age_success <- pass_df |>
+  inner_join(students |> select(id, age), by = "id")
 
+age_success_rate <- age_success |>
+  summarise(
+    success_rate = mean(pass),
+    .by = age
+  )
+
+age_success_rate |>
+  ggplot(aes(x = age, y = success_rate)) +
+  geom_col(fill = "darkseagreen3") +
+  theme_minimal() +
+  labs(
+    title = "Success rate as a function of age",
+    x = "Age",
+    y = "Success rate"
+  )
+```
 

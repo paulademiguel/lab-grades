@@ -15,8 +15,27 @@ library(ggplot2)
 library(lubridate)
 library(knitr)
 ```
+
 ### Question 1
+
 ```{r}
 courses <- read_csv(here("courses.csv"))
+```
+
+### Question 2
+
+```{r}
+courses |>
+  arrange(course) |>
+  rename(
+    `course name`     = course,
+    identifier        = course_id,
+    `number of grades` = nb_grades
+  ) |>
+  knitr::kable()
+```
+### Question 3
+```{r}
+
 ```
 

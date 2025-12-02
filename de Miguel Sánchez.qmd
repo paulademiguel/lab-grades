@@ -399,9 +399,30 @@ best_students |>
 
 The plot below shows the relationship between the average grades in `History of the Arcane`and `Celestial Navigation and Astronomy` for the group where these grades are the most correlated.
 
-Question 23
+### Question 23
 ```{r}
+grades_wide2 <- grades_wide |>
+  inner_join(students |> select(id, sex), by = "id")
 
+final_grades <- grades_wide2 |>
+  rowwise() |>
+  mutate(
+    final_grade = mean(c_across(-c(id, group, sex)), na.rm = TRUE)
+  ) |>
+  ungroup()
+
+final_grades_df <- final_grades |>
+  select(id, group, sex, final_grade) |>
+  arrange(desc(final_grade))
+
+final_grades_df |>
+  slice_head(n = 5) |>
+  knitr::kable()
 ```
+The final grade of a student is defined as the average of their average grades across all courses.
+
+The table below displays the top five students according to this metric.
+
+
 
 

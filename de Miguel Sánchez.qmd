@@ -370,8 +370,38 @@ The table below reports the correlation between the average grades in `History o
 
 Question 22
 ```{r}
+best_group <- correlations |>
+  mutate(abs_cor = abs(correlation)) |>
+  slice_max(order_by = abs_cor, n = 1) |>
+  pull(group)
 
+best_group
+
+best_students <- grades_wide |>
+  filter(group == best_group)
+
+best_students |>
+  ggplot(aes(
+    x = `Celestial Navigation and Astronomy`,
+    y = `History of the Arcane`
+  )) +
+  geom_point(alpha = 0.7, color = "darkmagenta") +
+  theme_minimal() +
+  labs(
+    title = paste(
+      "History of the Arcane vs Celestial Navigation and Astronomy — Group", 
+      best_group
+    ),
+    x = "Average grade in Celestial Navigation and Astronomy",
+    y = "Average grade in History of the Arcane"
+  )
 ```
 
+The plot below shows the relationship between the average grades in `History of the Arcane`and `Celestial Navigation and Astronomy` for the group where these grades are the most correlated.
+
+Question 23
+```{r}
+
+```
 
 

@@ -276,18 +276,4 @@ The bar plot below displays the distribution of the number of grades obtained in
 
 For each possible number of grades, it shows how many students have exactly that number.
 
-### Question 17
-```{r}
-elem_counts |>
-  ggplot(aes(x = group, y = n_elem)) +
-  geom_col(fill = "cornflowerblue") +
-  theme_minimal() +
-  labs(
-    title = "Number of grades in Elemental Mastery and Control by group",
-    x = "Group",
-    y = "Number of grades"
-  )
-```
-The graphic below compares the number of grades obtained in Elemental Mastery and Control across groups.
-This visualisation can be used to assess whether the number of grades depends on the group.
 

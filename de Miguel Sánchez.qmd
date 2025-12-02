@@ -441,5 +441,17 @@ We use a  boxplot  to study the differences in final grades between groups.
 This representation highlights potential variations in performance across groups.
 
 ### Question 25
+```{r}
+final_grades_df |>
+  ggplot(aes(x = group, y = final_grade)) +
+  geom_boxplot(fill = "purple2") +
+  facet_wrap(~ sex) +
+  theme_minimal() +
+  labs(
+    title = "Final grades by group and sex",
+    x = "Group",
+    y = "Final grade"
+  )
+```
 
 

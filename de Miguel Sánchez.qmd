@@ -107,3 +107,19 @@ students |>
 ```
 
 The histogram below displays the age distribution of the students
+
+### Question 8
+```{r}
+students |>
+  group_by(group) |>
+  summarise(
+    median_age = round(median(age, na.rm = TRUE))
+  ) |>
+   knitr::kable()
+```
+
+### Question 9
+```{r}
+
+```
+

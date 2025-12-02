@@ -188,4 +188,27 @@ grades_mod |>
     y = "Grade"
   )
 ```
+### Question 13
+```{r}
+grades_per_student <- grades |>
+  summarise(
+    n_grades = n(),
+    .by = id
+  ) |>
+  inner_join(students, by = "id") |>
+  select(id, group, sex, n_grades)
+
+grades_per_student |>
+  slice_head(n = 10) |>
+  knitr::kable()
+
+summary_table <- grades_per_student |>
+  summarise(
+    min_grades = min(n_grades),
+    max_grades = max(n_grades),
+    avg_grades = mean(n_grades),
+    median_grades = median(n_grades)
+  )
+summary_table
+```
 

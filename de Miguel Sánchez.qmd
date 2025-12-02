@@ -253,4 +253,27 @@ elem_counts |>
   slice_head(n = 10) |>
   knitr::kable()
 ```
+The table below shows an extract of the number of grades obtained by each student in Elemental Mastery and Control.
+
+### Question 16
+```{r}
+elem_distribution <- elem_counts |>
+  summarise(
+    n_students = n(),
+    .by = n_elem
+  )
+elem_distribution |>
+  ggplot(aes(x = n_elem, y = n_students)) +
+  geom_col(fill = "indianred3") +
+  theme_minimal() +
+  labs(
+    title = "Distribution of number of grades in Elemental Mastery and Control",
+    x = "Number of grades",
+    y = "Number of students"
+  )
+```
+The bar plot below displays the distribution of the number of grades obtained in Elemental Mastery and Control.
+
+For each possible number of grades, it shows how many students have exactly that number.
+
 
